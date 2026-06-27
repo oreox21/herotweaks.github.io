@@ -24,6 +24,23 @@ html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;line-height:1.6;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
 
+/* ANIMATED TOPOGRAPHIC BACKGROUND */
+.bg-topo{
+  position:fixed;inset:0;z-index:-1;pointer-events:none;
+  opacity:0.16;
+  background-image:url("data:image/svg+xml;utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20900%20900'%3E%3Cg%20fill='none'%20stroke='%23ffffff'%20stroke-width='1.1'%3E%3Cpath%20d='M-50%2080%20C80%2030%2C150%20130%2C260%2090%20S420%200%2C520%2070%20S680%20160%2C800%2090%20S950%2020%2C1000%2070'/%3E%3Cpath%20d='M-50%20140%20C70%2090%2C160%20190%2C270%20150%20S430%2050%2C530%20130%20S690%20210%2C810%20150%20S950%2070%2C1000%20130'/%3E%3Cpath%20d='M-50%20200%20C60%20150%2C170%20250%2C280%20210%20S440%20100%2C540%20190%20S700%20260%2C820%20210%20S950%20130%2C1000%20190'/%3E%3Cpath%20d='M-60%20420%20C40%20360%2C120%20460%2C230%20410%20S380%20300%2C470%20390%20S600%20480%2C700%20400%20S860%20320%2C960%20410'/%3E%3Cpath%20d='M-60%20470%20C30%20410%2C140%20510%2C260%20460%20S410%20350%2C500%20440%20S630%20530%2C740%20450%20S880%20370%2C960%20460'/%3E%3Cpath%20d='M150%20470%20C170%20440%2C220%20440%2C235%20470%20S270%20510%2C235%20530%20S180%20510%2C150%20470'/%3E%3Cpath%20d='M120%20470%20C150%20420%2C235%20420%2C265%20470%20S320%20540%2C265%20570%20S150%20530%2C120%20470'/%3E%3Cpath%20d='M380%2070%20C390%2055%2C415%2055%2C420%2072%20S400%2090%2C380%2070'/%3E%3Cpath%20d='M-50%20620%20C50%20580%2C130%20670%2C240%20630%20S400%20540%2C490%20620%20S630%20700%2C760%20630%20S900%20560%2C1000%20620'/%3E%3Cpath%20d='M-50%20680%20C40%20640%2C150%20730%2C260%20690%20S410%20600%2C510%20680%20S650%20760%2C780%20690%20S900%20620%2C1000%20680'/%3E%3Cpath%20d='M-50%20740%20C30%20700%2C170%20790%2C280%20750%20S430%20660%2C530%20740%20S670%20810%2C800%20740%20S900%20680%2C1000%20740'/%3E%3Cpath%20d='M-50%20800%20C20%20760%2C190%20850%2C300%20800%20S450%20720%2C550%20800%20S690%20860%2C820%20790%20S900%20730%2C1000%20800'/%3E%3Cpath%20d='M0%20780%20C40%20760%2C90%20760%2C110%20790%20S130%20840%2C110%20860%20S60%20850%2C0%20780'/%3E%3Cpath%20d='M-30%20760%20C20%20740%2C110%20740%2C140%20780%20S170%20860%2C140%20890%20S60%20870%2C-30%20760'/%3E%3C/g%3E%3C/svg%3E");
+  background-size:900px 900px;
+  background-repeat:repeat;
+  animation:topoDrift 90s linear infinite;
+  will-change:background-position;
+}
+@keyframes topoDrift{
+  0%{background-position:0 0}
+  50%{background-position:-450px 300px}
+  100%{background-position:-900px 600px}
+}
+@media (prefers-reduced-motion:reduce){.bg-topo{animation:none}}
+
 /* NAV */
 nav{
   position:fixed;top:0;width:100%;background:rgba(0,0,0,0.92);backdrop-filter:blur(16px);
@@ -225,14 +242,79 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem;text-align:center}
 .stat-num{font-size:2rem;font-weight:700;letter-spacing:-0.03em;margin-bottom:0.25rem}
 .stat-label{color:var(--text3);font-size:0.8rem;letter-spacing:0.05em;text-transform:uppercase}
 
+/* AUTH (Login / Cadastro) */
+.nav-right{display:flex;gap:0.6rem;align-items:center}
+.nav-account{display:none;align-items:center;gap:0.6rem}
+.nav-account.active{display:flex}
+.nav-account-avatar{
+  width:34px;height:34px;border-radius:50%;background:var(--bg4);border:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:600;flex-shrink:0
+}
+.nav-account-email{font-size:0.8rem;color:var(--text2);max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:none}
+@media(min-width:1000px){.nav-account-email{display:inline-block}}
+
+.auth-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(6px);
+  display:none;align-items:center;justify-content:center;z-index:2000;padding:1.25rem
+}
+.auth-overlay.open{display:flex}
+.auth-modal{
+  width:100%;max-width:380px;background:var(--bg2);border:1px solid var(--border2);
+  border-radius:18px;padding:2rem;position:relative;box-shadow:0 24px 60px rgba(0,0,0,0.5);
+  animation:authIn .2s ease;max-height:90vh;overflow-y:auto
+}
+@keyframes authIn{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.auth-close{
+  position:absolute;top:1rem;right:1rem;width:28px;height:28px;border-radius:50%;
+  background:rgba(255,255,255,0.05);border:1px solid var(--border2);color:var(--text2);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:0.9rem;line-height:1;
+  transition:background .15s,color .15s
+}
+.auth-close:hover{background:rgba(255,255,255,0.1);color:var(--text)}
+.auth-tabs{display:flex;gap:0.3rem;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:0.3rem;margin-bottom:1.5rem}
+.auth-tab{
+  flex:1;padding:0.55rem 0.5rem;font-size:0.82rem;font-weight:500;background:none;border:none;
+  color:var(--text2);border-radius:8px;cursor:pointer;font-family:inherit;transition:background .15s,color .15s
+}
+.auth-tab.active{background:var(--text);color:#000}
+.auth-pane{display:none}
+.auth-pane.active{display:block;animation:fadein .2s ease}
+.auth-title{font-size:1.15rem;font-weight:700;letter-spacing:-0.01em;margin-bottom:0.3rem}
+.auth-sub{color:var(--text2);font-size:0.82rem;margin-bottom:1.4rem;line-height:1.5}
+.auth-field{margin-bottom:1rem}
+.auth-field label{display:block;font-size:0.78rem;color:var(--text2);margin-bottom:0.4rem}
+.auth-field input{
+  width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:10px;
+  padding:0.7rem 0.85rem;color:var(--text);font-size:0.9rem;font-family:inherit;
+  transition:border-color .15s,background .15s
+}
+.auth-field input:focus{outline:none;border-color:var(--text2);background:var(--bg4)}
+.auth-submit{width:100%;justify-content:center;padding:0.8rem 1rem;font-size:0.9rem;margin-top:0.3rem}
+.auth-msg{font-size:0.8rem;padding:0.65rem 0.85rem;border-radius:8px;margin-bottom:1rem;line-height:1.45;display:none}
+.auth-msg.show{display:block}
+.auth-msg.error{background:rgba(239,68,68,0.1);color:#f87171;border:1px solid rgba(239,68,68,0.25)}
+.auth-msg.success{background:rgba(34,197,94,0.1);color:#4ade80;border:1px solid rgba(34,197,94,0.25)}
+.auth-foot{text-align:center;font-size:0.82rem;color:var(--text2);margin-top:1.25rem;line-height:1.6}
+.auth-foot a{color:var(--text);text-decoration:underline;cursor:pointer}
+.auth-spinner{
+  width:14px;height:14px;border-radius:50%;border:2px solid rgba(0,0,0,0.25);border-top-color:#000;
+  display:inline-block;animation:authspin .6s linear infinite;margin-right:0.5rem;vertical-align:-2px
+}
+@keyframes authspin{to{transform:rotate(360deg)}}
+
 @media(max-width:768px){
   .nav-links{display:none}
   .fb-grid{columns:1}
   .hero h1{font-size:2.5rem}
+  .nav-right .btn{padding:0.55rem 0.9rem;font-size:0.78rem}
+  .auth-modal{padding:1.5rem}
 }
 </style>
 </head>
 <body>
+
+<!-- ANIMATED TOPOGRAPHIC BACKGROUND -->
+<div class="bg-topo" aria-hidden="true"></div>
 
 <!-- NAV -->
 <nav>
@@ -244,6 +326,15 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem;text-align:center}
     <li><a href="#feedback">Feedbacks</a></li>
     <li><a href="#faq" onclick="switchTab('tab-faq', document.getElementById('faq-tab-btn'))">FAQ</a></li>
   </ul>
+  <div class="nav-right" id="navRight">
+    <div class="nav-account" id="navAccount">
+      <div class="nav-account-avatar" id="navAvatar">U</div>
+      <span class="nav-account-email" id="navEmail"></span>
+      <button class="btn btn-ghost" id="btnLogout" type="button">Sair</button>
+    </div>
+    <button class="btn btn-ghost" id="btnOpenLogin" type="button">Entrar</button>
+    <button class="btn btn-solid" id="btnOpenSignup" type="button">Criar conta</button>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -677,6 +768,67 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem;text-align:center}
   <p class="footer-copy">© 2026 HeroTweaks · www.herotweaks.com · @herotweaks</p>
 </footer>
 
+<!-- AUTH MODAL (Cadastro / Login) -->
+<div class="auth-overlay" id="authOverlay">
+  <div class="auth-modal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <button class="auth-close" id="authClose" type="button" aria-label="Fechar">✕</button>
+
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="authTabSignupBtn" type="button" onclick="window.__authSwitch('signup')">Criar conta</button>
+      <button class="auth-tab" id="authTabLoginBtn" type="button" onclick="window.__authSwitch('login')">Entrar</button>
+    </div>
+
+    <!-- CADASTRO -->
+    <div class="auth-pane active" id="authPaneSignup">
+      <h3 class="auth-title" id="authTitle">Criar sua conta</h3>
+      <p class="auth-sub">Cadastre-se para acompanhar suas otimizações na HeroTweaks.</p>
+      <div class="auth-msg" id="signupMsg"></div>
+      <form id="signupForm" novalidate>
+        <div class="auth-field">
+          <label for="signupName">Nome</label>
+          <input type="text" id="signupName" autocomplete="name" placeholder="Seu nome">
+        </div>
+        <div class="auth-field">
+          <label for="signupEmail">E-mail</label>
+          <input type="email" id="signupEmail" autocomplete="email" placeholder="voce@email.com" required>
+        </div>
+        <div class="auth-field">
+          <label for="signupPassword">Senha</label>
+          <input type="password" id="signupPassword" autocomplete="new-password" placeholder="Mínimo 6 caracteres" required minlength="6">
+        </div>
+        <div class="auth-field">
+          <label for="signupPasswordConfirm">Confirmar senha</label>
+          <input type="password" id="signupPasswordConfirm" autocomplete="new-password" placeholder="Repita a senha" required minlength="6">
+        </div>
+        <button type="submit" class="btn btn-solid auth-submit" id="signupSubmit">Criar conta</button>
+      </form>
+      <p class="auth-foot">Já tem conta? <a onclick="window.__authSwitch('login')">Entrar</a></p>
+    </div>
+
+    <!-- LOGIN -->
+    <div class="auth-pane" id="authPaneLogin">
+      <h3 class="auth-title">Entrar na sua conta</h3>
+      <p class="auth-sub">Acesse com seu e-mail e senha cadastrados.</p>
+      <div class="auth-msg" id="loginMsg"></div>
+      <form id="loginForm" novalidate>
+        <div class="auth-field">
+          <label for="loginEmail">E-mail</label>
+          <input type="email" id="loginEmail" autocomplete="email" placeholder="voce@email.com" required>
+        </div>
+        <div class="auth-field">
+          <label for="loginPassword">Senha</label>
+          <input type="password" id="loginPassword" autocomplete="current-password" placeholder="Sua senha" required>
+        </div>
+        <button type="submit" class="btn btn-solid auth-submit" id="loginSubmit">Entrar</button>
+      </form>
+      <p class="auth-foot">
+        <a id="forgotPasswordLink">Esqueci minha senha</a> · Não tem conta? <a onclick="window.__authSwitch('signup')">Criar conta</a>
+      </p>
+    </div>
+
+  </div>
+</div>
+
 <script>
 function switchTab(id,btn){
   document.querySelectorAll('.tab-pane').forEach(el=>el.classList.remove('active'));
@@ -735,6 +887,228 @@ document.addEventListener('click', function(e){
   const target = e.target.closest('.btn, .tab-btn, .contact-card, .nav-links a, .footer-links a, .nav-logo, .blog-card, .fb-card');
   if(target) playClickSound();
 }, true);
+</script>
+
+<script type="module">
+/* =====================================================================
+   FIREBASE AUTHENTICATION (E-mail / Senha) — HeroTweaks
+   ---------------------------------------------------------------------
+   IMPORTANTE: substitua "SUA_API_KEY" e "SEU_MEASUREMENT_ID" pelos
+   valores reais do seu projeto, disponíveis em:
+   Firebase Console > Configurações do projeto > Geral > Seus apps.
+   Sem isso o login/cadastro não vai funcionar.
+
+   Além disso, no Firebase Console vá em:
+   Authentication > Sign-in method > ative o provedor "E-mail/senha".
+===================================================================== */
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-analytics.js";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
+  updateProfile,
+  sendPasswordResetEmail
+} from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "SUA_API_KEY",
+  authDomain: "herotweaks-site.firebaseapp.com",
+  projectId: "herotweaks-site",
+  storageBucket: "herotweaks-site.firebasestorage.app",
+  messagingSenderId: "497130733036",
+  appId: "1:497130733036:web:2de52026c4baafef3714c9",
+  measurementId: "SEU_MEASUREMENT_ID"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// Analytics é opcional: só inicializa se o measurementId já tiver sido configurado de verdade
+if (firebaseConfig.measurementId && firebaseConfig.measurementId !== "SEU_MEASUREMENT_ID") {
+  try { getAnalytics(app); } catch (e) { console.warn("Firebase Analytics não pôde ser iniciado:", e); }
+}
+
+/* ---------- Elementos da UI ---------- */
+const overlay = document.getElementById('authOverlay');
+const btnOpenLogin = document.getElementById('btnOpenLogin');
+const btnOpenSignup = document.getElementById('btnOpenSignup');
+const authClose = document.getElementById('authClose');
+const navAccount = document.getElementById('navAccount');
+const navAvatar = document.getElementById('navAvatar');
+const navEmail = document.getElementById('navEmail');
+const btnLogout = document.getElementById('btnLogout');
+
+const tabSignupBtn = document.getElementById('authTabSignupBtn');
+const tabLoginBtn = document.getElementById('authTabLoginBtn');
+const paneSignup = document.getElementById('authPaneSignup');
+const paneLogin = document.getElementById('authPaneLogin');
+
+const signupForm = document.getElementById('signupForm');
+const signupMsg = document.getElementById('signupMsg');
+const signupSubmit = document.getElementById('signupSubmit');
+
+const loginForm = document.getElementById('loginForm');
+const loginMsg = document.getElementById('loginMsg');
+const loginSubmit = document.getElementById('loginSubmit');
+
+const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+
+/* ---------- Abrir / fechar / alternar abas do modal ---------- */
+function switchAuthTab(tab){
+  const isSignup = tab === 'signup';
+  tabSignupBtn.classList.toggle('active', isSignup);
+  tabLoginBtn.classList.toggle('active', !isSignup);
+  paneSignup.classList.toggle('active', isSignup);
+  paneLogin.classList.toggle('active', !isSignup);
+  clearMsg(signupMsg);
+  clearMsg(loginMsg);
+}
+window.__authSwitch = switchAuthTab; // usado pelos links dentro do próprio modal
+
+function openAuth(tab){
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  switchAuthTab(tab || 'signup');
+}
+function closeAuth(){
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+btnOpenLogin?.addEventListener('click', () => openAuth('login'));
+btnOpenSignup?.addEventListener('click', () => openAuth('signup'));
+authClose?.addEventListener('click', closeAuth);
+overlay?.addEventListener('click', (e) => { if (e.target === overlay) closeAuth(); });
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && overlay.classList.contains('open')) closeAuth();
+});
+
+/* ---------- Helpers de mensagem / loading ---------- */
+function showMsg(el, text, type){
+  el.textContent = text;
+  el.className = 'auth-msg show ' + type;
+}
+function clearMsg(el){
+  el.textContent = '';
+  el.className = 'auth-msg';
+}
+function setLoading(button, loading, label){
+  button.disabled = loading;
+  button.innerHTML = loading ? '<span class="auth-spinner"></span>Aguarde…' : label;
+}
+
+/* ---------- Tradução dos erros do Firebase para PT-BR ---------- */
+function traduzErro(code){
+  const mapa = {
+    'auth/email-already-in-use': 'Este e-mail já está cadastrado. Tente entrar.',
+    'auth/invalid-email': 'E-mail inválido. Verifique e tente novamente.',
+    'auth/weak-password': 'Senha muito fraca. Use ao menos 6 caracteres.',
+    'auth/missing-password': 'Digite uma senha.',
+    'auth/user-not-found': 'Não encontramos uma conta com este e-mail.',
+    'auth/wrong-password': 'Senha incorreta. Tente novamente.',
+    'auth/invalid-credential': 'E-mail ou senha incorretos.',
+    'auth/too-many-requests': 'Muitas tentativas. Aguarde um momento e tente de novo.',
+    'auth/network-request-failed': 'Falha de conexão. Verifique sua internet.',
+    'auth/operation-not-allowed': 'Cadastro por e-mail/senha está desativado no Firebase (ative em Authentication > Sign-in method).'
+  };
+  return mapa[code] || ('Ocorreu um erro. Tente novamente em alguns instantes.' + (code ? ' (' + code + ')' : ''));
+}
+
+function emailValido(email){
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+/* ---------- CADASTRO ---------- */
+signupForm?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  clearMsg(signupMsg);
+
+  const name = document.getElementById('signupName').value.trim();
+  const email = document.getElementById('signupEmail').value.trim();
+  const password = document.getElementById('signupPassword').value;
+  const passwordConfirm = document.getElementById('signupPasswordConfirm').value;
+
+  if (!emailValido(email)) { showMsg(signupMsg, 'Digite um e-mail válido.', 'error'); return; }
+  if (password.length < 6) { showMsg(signupMsg, 'A senha precisa ter pelo menos 6 caracteres.', 'error'); return; }
+  if (password !== passwordConfirm) { showMsg(signupMsg, 'As senhas não coincidem.', 'error'); return; }
+
+  setLoading(signupSubmit, true);
+  try {
+    const cred = await createUserWithEmailAndPassword(auth, email, password);
+    if (name) {
+      try { await updateProfile(cred.user, { displayName: name }); } catch (_) { /* não bloqueia o cadastro */ }
+    }
+    showMsg(signupMsg, 'Conta criada com sucesso! Bem-vindo(a).', 'success');
+    signupForm.reset();
+    setTimeout(closeAuth, 1200);
+  } catch (err) {
+    showMsg(signupMsg, traduzErro(err.code), 'error');
+  } finally {
+    setLoading(signupSubmit, false, 'Criar conta');
+  }
+});
+
+/* ---------- LOGIN ---------- */
+loginForm?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  clearMsg(loginMsg);
+
+  const email = document.getElementById('loginEmail').value.trim();
+  const password = document.getElementById('loginPassword').value;
+
+  if (!emailValido(email)) { showMsg(loginMsg, 'Digite um e-mail válido.', 'error'); return; }
+  if (!password) { showMsg(loginMsg, 'Digite sua senha.', 'error'); return; }
+
+  setLoading(loginSubmit, true);
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    showMsg(loginMsg, 'Login realizado com sucesso!', 'success');
+    loginForm.reset();
+    setTimeout(closeAuth, 800);
+  } catch (err) {
+    showMsg(loginMsg, traduzErro(err.code), 'error');
+  } finally {
+    setLoading(loginSubmit, false, 'Entrar');
+  }
+});
+
+/* ---------- Esqueci minha senha ---------- */
+forgotPasswordLink?.addEventListener('click', async () => {
+  const email = document.getElementById('loginEmail').value.trim();
+  if (!emailValido(email)) {
+    showMsg(loginMsg, 'Digite seu e-mail no campo acima para recuperar a senha.', 'error');
+    return;
+  }
+  try {
+    await sendPasswordResetEmail(auth, email);
+    showMsg(loginMsg, 'Enviamos um e-mail para você redefinir sua senha.', 'success');
+  } catch (err) {
+    showMsg(loginMsg, traduzErro(err.code), 'error');
+  }
+});
+
+/* ---------- Logout ---------- */
+btnLogout?.addEventListener('click', () => signOut(auth));
+
+/* ---------- Reflete o estado de autenticação na navbar ---------- */
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    navAccount.classList.add('active');
+    btnOpenLogin.style.display = 'none';
+    btnOpenSignup.style.display = 'none';
+    const displayName = user.displayName || user.email || 'Usuário';
+    navAvatar.textContent = displayName.charAt(0).toUpperCase();
+    navEmail.textContent = user.displayName || user.email || '';
+  } else {
+    navAccount.classList.remove('active');
+    btnOpenLogin.style.display = '';
+    btnOpenSignup.style.display = '';
+    navEmail.textContent = '';
+  }
+});
 </script>
 </body>
 </html>
