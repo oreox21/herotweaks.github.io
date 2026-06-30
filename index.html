@@ -182,9 +182,9 @@ nav{
 .contact-handle{font-size:0.8rem;color:var(--text3);margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid var(--border)}
 
 /* PRICING (Agendamento) */
-.pricing-wrap{display:flex;justify-content:center}
+.pricing-wrap{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap}
 .pricing-card{
-  width:100%;max-width:420px;background:var(--bg2);border:1px solid var(--border2);
+  width:100%;max-width:380px;background:var(--bg2);border:1px solid var(--border2);
   border-radius:16px;padding:2.25rem;transition:border-color .2s,transform .2s,box-shadow .2s;
 }
 .pricing-card:hover{border-color:#444;transform:translateY(-3px);box-shadow:0 14px 36px rgba(0,0,0,0.45)}
@@ -197,6 +197,7 @@ nav{
 .pricing-subtitle{color:var(--text2);font-size:0.85rem;margin-bottom:1.5rem}
 .pricing-price{margin-bottom:1.5rem}
 .price-currency{font-size:1.7rem;font-weight:700;letter-spacing:-0.02em;margin-right:0.4rem}
+.price-value{font-size:1.7rem;font-weight:700;letter-spacing:-0.02em}
 .price-note{display:block;color:var(--text2);font-size:0.82rem;margin-top:0.35rem;line-height:1.5}
 .pricing-divider{border-top:1px solid var(--border);margin-bottom:1.5rem}
 .pricing-list{list-style:none;margin-bottom:2rem}
@@ -302,12 +303,49 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem;text-align:center}
 }
 @keyframes authspin{to{transform:rotate(360deg)}}
 
+/* ===== SUPORTE / TICKETS ===== */
+.support-gate{text-align:center;padding:3rem 1rem;color:var(--text2)}
+.support-gate p{margin-bottom:1.25rem;font-size:0.95rem}
+.ticket-form-wrap h3{font-size:1.1rem;font-weight:700;margin-bottom:0.3rem}
+.ticket-form-wrap .sub{color:var(--text2);font-size:0.82rem;margin-bottom:1.5rem}
+.tf-field{margin-bottom:1rem}
+.tf-field label{display:block;font-size:0.78rem;color:var(--text2);margin-bottom:0.4rem}
+.tf-field input,.tf-field textarea{
+  width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:10px;
+  padding:0.7rem 0.85rem;color:var(--text);font-size:0.9rem;font-family:inherit;resize:vertical;
+  transition:border-color .15s}
+.tf-field input:focus,.tf-field textarea:focus{outline:none;border-color:var(--text2)}
+.tf-field textarea{min-height:110px}
+.tf-msg{font-size:0.8rem;padding:0.65rem 0.85rem;border-radius:8px;margin-bottom:1rem;display:none}
+.tf-msg.show{display:block}
+.tf-msg.error{background:rgba(239,68,68,0.1);color:#f87171;border:1px solid rgba(239,68,68,0.25)}
+.tf-msg.success{background:rgba(34,197,94,0.1);color:#4ade80;border:1px solid rgba(34,197,94,0.25)}
+.admin-panel h3{font-size:1.1rem;font-weight:700;margin-bottom:0.25rem}
+.admin-panel .sub{color:var(--text2);font-size:0.82rem;margin-bottom:1.5rem}
+.admin-tabs{display:flex;gap:0.3rem;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:0.3rem;margin-bottom:1.5rem;width:fit-content}
+.admin-tab{padding:0.5rem 1.1rem;font-size:0.82rem;font-weight:500;background:none;border:none;color:var(--text2);border-radius:8px;cursor:pointer;font-family:inherit;transition:background .15s,color .15s}
+.admin-tab.active{background:var(--text);color:#000}
+.ticket-list{display:flex;flex-direction:column;gap:0.75rem}
+.ticket-card{background:var(--bg3);border:1px solid var(--border2);border-radius:12px;padding:1.25rem 1.4rem;display:flex;flex-direction:column;gap:0.5rem}
+.ticket-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.ticket-assunto{font-weight:600;font-size:0.95rem}
+.ticket-badge{font-size:0.72rem;font-weight:600;padding:0.22rem 0.7rem;border-radius:20px;flex-shrink:0}
+.ticket-badge.open{background:rgba(234,179,8,0.15);color:#facc15;border:1px solid rgba(234,179,8,0.3)}
+.ticket-badge.closed{background:rgba(34,197,94,0.12);color:#4ade80;border:1px solid rgba(34,197,94,0.25)}
+.ticket-meta{font-size:0.78rem;color:var(--text3)}
+.ticket-msg{font-size:0.87rem;color:var(--text2);line-height:1.6;white-space:pre-wrap}
+.ticket-actions{display:flex;justify-content:flex-end;margin-top:0.25rem}
+.btn-resolve{font-size:0.8rem;padding:0.45rem 1rem;border-radius:8px}
+.tickets-empty{text-align:center;color:var(--text3);padding:2.5rem 0;font-size:0.9rem}
+.admin-badge{display:inline-block;font-size:0.68rem;font-weight:700;background:rgba(139,92,246,0.2);color:#a78bfa;border:1px solid rgba(139,92,246,0.3);border-radius:20px;padding:0.15rem 0.55rem;margin-left:0.5rem;vertical-align:middle}
+
 @media(max-width:768px){
   .nav-links{display:none}
   .fb-grid{columns:1}
   .hero h1{font-size:2.5rem}
   .nav-right .btn{padding:0.55rem 0.9rem;font-size:0.78rem}
   .auth-modal{padding:1.5rem}
+  .pricing-wrap{flex-direction:column;align-items:center}
 }
 </style>
 </head>
@@ -407,6 +445,7 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem;text-align:center}
     <button class="tab-btn" onclick="switchTab('tab-fb',this)">Feedbacks</button>
     <button class="tab-btn" onclick="switchTab('tab-blog',this)" id="blog-tab-btn">My Blog</button>
     <button class="tab-btn" onclick="switchTab('tab-faq',this)" id="faq-tab-btn">FAQ</button>
+    <button class="tab-btn" onclick="switchTab('tab-support',this)" id="support-tab-btn">Suporte</button>
     <button class="tab-btn" onclick="switchTab('tab-contact',this)" id="contact-tab-btn">Contato</button>
   </div>
 
@@ -669,7 +708,7 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem;text-align:center}
         <p class="pricing-subtitle">HeroOS 11 25H2 otimizado</p>
         <div class="pricing-price">
           <span class="price-currency">R$</span>
-          <span class="price-note">Orçamento é feito de acordo com as peças do PC</span>
+          <span class="price-value">75</span>
         </div>
         <div class="pricing-divider"></div>
         <ul class="pricing-list">
@@ -678,7 +717,62 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem;text-align:center}
           <li>Redução de input lag e stutter</li>
           <li>Sistema leve e responsivo</li>
         </ul>
-        <a href="https://discord.gg/UzRMyTgwa5" target="_blank" class="btn btn-solid pricing-btn">Adquirir</a>
+        <a href="#" onclick="switchTab('tab-contact', document.getElementById('contact-tab-btn'));return false" class="btn btn-solid pricing-btn">Adquirir</a>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-icon">🔥</div>
+        <h3 class="pricing-title">HeroOS 10 + Overclock Pro</h3>
+        <p class="pricing-subtitle">Ajuste de timings + overclock completo</p>
+        <div class="pricing-price">
+          <span class="price-currency">R$</span>
+          <span class="price-note">Orçamento é feito de acordo com as peças do PC</span>
+        </div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-list">
+          <li>Ajusto timings de memória RAM</li>
+          <li>Overclock em todas as peças possíveis do PC</li>
+          <li>BIOS tunada para extrair o máximo do hardware</li>
+          <li>Sistema leve com ganhos reais de FPS</li>
+        </ul>
+        <a href="#" onclick="switchTab('tab-contact', document.getElementById('contact-tab-btn'));return false" class="btn btn-solid pricing-btn">Adquirir</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUPPORT TAB -->
+  <div id="tab-support" class="tab-pane">
+    <!-- ESTADO: NÃO LOGADO -->
+    <div id="support-gate" class="support-gate" style="display:none">
+      <p>Você precisa estar logado para abrir um ticket de suporte.</p>
+      <button class="btn btn-solid" onclick="document.getElementById('btnOpenLogin').click()">Entrar / Criar conta</button>
+    </div>
+    <!-- ESTADO: USUÁRIO COMUM -->
+    <div id="support-user" class="ticket-form-wrap" style="display:none">
+      <h3>Abrir ticket de suporte</h3>
+      <p class="sub">Descreva seu problema e responderei o mais rápido possível.</p>
+      <div class="tf-msg" id="ticketMsg"></div>
+      <form id="ticketForm" novalidate>
+        <div class="tf-field">
+          <label for="ticketAssunto">Assunto</label>
+          <input type="text" id="ticketAssunto" placeholder="Ex: Problema no tweak de FPS" required maxlength="120">
+        </div>
+        <div class="tf-field">
+          <label for="ticketMensagem">Mensagem</label>
+          <textarea id="ticketMensagem" placeholder="Descreva o que está acontecendo com o máximo de detalhes..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-solid" id="ticketSubmit" style="width:100%;justify-content:center;padding:0.8rem">Enviar ticket</button>
+      </form>
+    </div>
+    <!-- ESTADO: ADMIN -->
+    <div id="support-admin" class="admin-panel" style="display:none">
+      <h3>Painel de Suporte <span class="admin-badge">ADMIN</span></h3>
+      <p class="sub">Gerencie os tickets enviados pelos usuários.</p>
+      <div class="admin-tabs">
+        <button class="admin-tab active" id="adminTabOpen" onclick="window.__adminTab('open')">Abertos <span id="countOpen"></span></button>
+        <button class="admin-tab" id="adminTabClosed" onclick="window.__adminTab('closed')">Resolvidos <span id="countClosed"></span></button>
+      </div>
+      <div class="ticket-list" id="ticketList">
+        <p class="tickets-empty">Carregando tickets…</p>
       </div>
     </div>
   </div>
@@ -731,7 +825,7 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem;text-align:center}
   <!-- CONTACT TAB -->
   <div id="tab-contact" class="tab-pane" id="contact">
     <h2 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em;margin-bottom:0.5rem">Fale comigo</h2>
-    <p style="color:var(--text2);font-size:0.875rem;margin-bottom:2rem">Dúvidas, sugestões ou suporte direto.</p>
+    <p style="color:var(--text2);font-size:0.875rem;margin-bottom:2rem">Agende a otimização no WhatsApp, Twitter ou Discord — ou abra um ticket de suporte.</p>
     <div class="contact-grid">
       <a href="https://wa.me/5511980596585" target="_blank" class="contact-card">
         <span class="contact-icon">📱</span>
@@ -750,6 +844,17 @@ footer{border-top:1px solid var(--border);padding:3rem 2rem;text-align:center}
         <h3>Twitter / X</h3>
         <p>Updates, dicas e tweaks novos por lá.</p>
         <div class="contact-handle">@herotweaks</div>
+      </a>
+      <a href="#" onclick="switchTab('tab-support', document.getElementById('support-tab-btn'));return false" class="contact-card" style="position:relative">
+        <span class="contact-icon">🎫</span>
+        <h3>Abrir ticket
+          <span style="display:inline-flex;align-items:center;gap:0.3rem;font-size:0.68rem;font-weight:600;color:#4ade80;background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.3);border-radius:999px;padding:0.15rem 0.55rem;margin-left:0.5rem;vertical-align:middle">
+            <span style="width:6px;height:6px;border-radius:50%;background:#4ade80;display:inline-block"></span>
+            Online
+          </span>
+        </h3>
+        <p>Estamos ativos. Abra um ticket e responderei rapidamente.</p>
+        <div class="contact-handle">Painel de suporte</div>
       </a>
     </div>
   </div>
@@ -839,6 +944,10 @@ function switchTab(id,btn){
   else if(id==='tab-blog'){window.location.hash='blog'}
   else if(id==='tab-faq'){window.location.hash='faq'}
   else if(id==='tab-schedule'){window.location.hash='schedule'}
+  else if(id==='tab-support'){
+    window.location.hash='suporte';
+    if(typeof window.__updateSupportView==='function') window.__updateSupportView();
+  }
   else{window.location.hash='contact'}
 }
 function toggleFaq(btn){
@@ -866,20 +975,25 @@ function playClickSound(){
     const now = audioCtx.currentTime;
     const osc = audioCtx.createOscillator();
     const gain = audioCtx.createGain();
+    const filter = audioCtx.createBiquadFilter();
+
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(2200, now);
 
     osc.type = 'sine';
-    osc.frequency.setValueAtTime(1100, now);
-    osc.frequency.exponentialRampToValueAtTime(700, now + 0.05);
+    osc.frequency.setValueAtTime(620, now);
+    osc.frequency.exponentialRampToValueAtTime(420, now + 0.035);
 
     gain.gain.setValueAtTime(0.0001, now);
-    gain.gain.exponentialRampToValueAtTime(0.18, now + 0.008);
-    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.09);
+    gain.gain.exponentialRampToValueAtTime(0.09, now + 0.004);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.05);
 
-    osc.connect(gain);
+    osc.connect(filter);
+    filter.connect(gain);
     gain.connect(audioCtx.destination);
 
     osc.start(now);
-    osc.stop(now + 0.1);
+    osc.stop(now + 0.06);
   }catch(e){ /* silently ignore if audio is blocked */ }
 }
 
@@ -890,87 +1004,95 @@ document.addEventListener('click', function(e){
 </script>
 
 <script type="module">
-/* =====================================================================
-   FIREBASE AUTHENTICATION (E-mail / Senha) — HeroTweaks
-   ---------------------------------------------------------------------
-   IMPORTANTE: substitua "SUA_API_KEY" e "SEU_MEASUREMENT_ID" pelos
-   valores reais do seu projeto, disponíveis em:
-   Firebase Console > Configurações do projeto > Geral > Seus apps.
-   Sem isso o login/cadastro não vai funcionar.
-
-   Além disso, no Firebase Console vá em:
-   Authentication > Sign-in method > ative o provedor "E-mail/senha".
-===================================================================== */
+/* ── Firebase Auth + Firestore — HeroTweaks ── */
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-analytics.js";
 import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut,
-  updateProfile,
-  sendPasswordResetEmail
+  getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
+  onAuthStateChanged, signOut, updateProfile, sendPasswordResetEmail
 } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
+import {
+  getFirestore, collection, addDoc, getDocs, doc,
+  updateDoc, query, orderBy, serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "SUA_API_KEY",
+  apiKey: "AIzaSyB5kSBjv-wWfivVYt5oqrBJKB2v2HWfBCU",
   authDomain: "herotweaks-site.firebaseapp.com",
   projectId: "herotweaks-site",
   storageBucket: "herotweaks-site.firebasestorage.app",
   messagingSenderId: "497130733036",
-  appId: "1:497130733036:web:2de52026c4baafef3714c9",
-  measurementId: "SEU_MEASUREMENT_ID"
+  appId: "1:497130733036:web:2de52026c4baafef3714c9"
 };
 
-const app = initializeApp(firebaseConfig);
+/* ── Seu e-mail de admin (dono do site) ── */
+const ADMIN_EMAIL = "herotweakss@gmail.com";
 
-console.log("Firebase carregado!");
-console.log(firebaseConfig);
-
+const app  = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db   = getFirestore(app);
 
-// Analytics é opcional: só inicializa se o measurementId já tiver sido configurado de verdade
-if (firebaseConfig.measurementId && firebaseConfig.measurementId !== "SEU_MEASUREMENT_ID") {
-  try { getAnalytics(app); } catch (e) { console.warn("Firebase Analytics não pôde ser iniciado:", e); }
-}
-
-/* ---------- Elementos da UI ---------- */
-const overlay = document.getElementById('authOverlay');
-const btnOpenLogin = document.getElementById('btnOpenLogin');
+/* ════════════ AUTH — elementos ════════════ */
+const overlay       = document.getElementById('authOverlay');
+const btnOpenLogin  = document.getElementById('btnOpenLogin');
 const btnOpenSignup = document.getElementById('btnOpenSignup');
-const authClose = document.getElementById('authClose');
-const navAccount = document.getElementById('navAccount');
-const navAvatar = document.getElementById('navAvatar');
-const navEmail = document.getElementById('navEmail');
-const btnLogout = document.getElementById('btnLogout');
-
-const tabSignupBtn = document.getElementById('authTabSignupBtn');
-const tabLoginBtn = document.getElementById('authTabLoginBtn');
-const paneSignup = document.getElementById('authPaneSignup');
-const paneLogin = document.getElementById('authPaneLogin');
-
-const signupForm = document.getElementById('signupForm');
-const signupMsg = document.getElementById('signupMsg');
-const signupSubmit = document.getElementById('signupSubmit');
-
-const loginForm = document.getElementById('loginForm');
-const loginMsg = document.getElementById('loginMsg');
-const loginSubmit = document.getElementById('loginSubmit');
-
+const authClose     = document.getElementById('authClose');
+const navAccount    = document.getElementById('navAccount');
+const navAvatar     = document.getElementById('navAvatar');
+const navEmail      = document.getElementById('navEmail');
+const btnLogout     = document.getElementById('btnLogout');
+const tabSignupBtn  = document.getElementById('authTabSignupBtn');
+const tabLoginBtn   = document.getElementById('authTabLoginBtn');
+const paneSignup    = document.getElementById('authPaneSignup');
+const paneLogin     = document.getElementById('authPaneLogin');
+const signupForm    = document.getElementById('signupForm');
+const signupMsg     = document.getElementById('signupMsg');
+const signupSubmit  = document.getElementById('signupSubmit');
+const loginForm     = document.getElementById('loginForm');
+const loginMsg      = document.getElementById('loginMsg');
+const loginSubmit   = document.getElementById('loginSubmit');
 const forgotPasswordLink = document.getElementById('forgotPasswordLink');
 
-/* ---------- Abrir / fechar / alternar abas do modal ---------- */
-function switchAuthTab(tab){
-  const isSignup = tab === 'signup';
-  tabSignupBtn.classList.toggle('active', isSignup);
-  tabLoginBtn.classList.toggle('active', !isSignup);
-  paneSignup.classList.toggle('active', isSignup);
-  paneLogin.classList.toggle('active', !isSignup);
-  clearMsg(signupMsg);
-  clearMsg(loginMsg);
+/* ── Helpers ── */
+function showMsg(el, text, type){
+  el.textContent = text;
+  const base = el.classList.contains('tf-msg') ? 'tf-msg' : 'auth-msg';
+  el.className = base + ' show ' + type;
 }
-window.__authSwitch = switchAuthTab; // usado pelos links dentro do próprio modal
+function clearMsg(el){
+  el.textContent = '';
+  el.className = el.classList.contains('tf-msg') ? 'tf-msg' : 'auth-msg';
+}
+function setLoading(btn, on, label){
+  btn.disabled = on;
+  btn.innerHTML = on ? '<span class="auth-spinner"></span>Aguarde…' : label;
+}
+function traduzErro(code){
+  const m = {
+    'auth/email-already-in-use':'Este e-mail já está cadastrado. Tente entrar.',
+    'auth/invalid-email':'E-mail inválido.',
+    'auth/weak-password':'Senha fraca. Use ao menos 6 caracteres.',
+    'auth/missing-password':'Digite uma senha.',
+    'auth/user-not-found':'Não encontramos uma conta com este e-mail.',
+    'auth/wrong-password':'Senha incorreta.',
+    'auth/invalid-credential':'E-mail ou senha incorretos.',
+    'auth/too-many-requests':'Muitas tentativas. Aguarde e tente de novo.',
+    'auth/network-request-failed':'Falha de conexão. Verifique sua internet.',
+    'auth/operation-not-allowed':'Cadastro desativado no Firebase (ative em Authentication > Sign-in method).'
+  };
+  return m[code] || ('Ocorreu um erro.' + (code ? ' ('+code+')' : ''));
+}
+function emailValido(e){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+
+/* ── Modal auth ── */
+function switchAuthTab(tab){
+  const s = tab === 'signup';
+  tabSignupBtn.classList.toggle('active', s);
+  tabLoginBtn.classList.toggle('active', !s);
+  paneSignup.classList.toggle('active', s);
+  paneLogin.classList.toggle('active', !s);
+  clearMsg(signupMsg); clearMsg(loginMsg);
+}
+window.__authSwitch = switchAuthTab;
 
 function openAuth(tab){
   overlay.classList.add('open');
@@ -981,137 +1103,188 @@ function closeAuth(){
   overlay.classList.remove('open');
   document.body.style.overflow = '';
 }
-
 btnOpenLogin?.addEventListener('click', () => openAuth('login'));
 btnOpenSignup?.addEventListener('click', () => openAuth('signup'));
 authClose?.addEventListener('click', closeAuth);
-overlay?.addEventListener('click', (e) => { if (e.target === overlay) closeAuth(); });
+overlay?.addEventListener('click', (e) => { if(e.target === overlay) closeAuth(); });
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && overlay.classList.contains('open')) closeAuth();
+  if(e.key === 'Escape' && overlay.classList.contains('open')) closeAuth();
 });
 
-/* ---------- Helpers de mensagem / loading ---------- */
-function showMsg(el, text, type){
-  el.textContent = text;
-  el.className = 'auth-msg show ' + type;
-}
-function clearMsg(el){
-  el.textContent = '';
-  el.className = 'auth-msg';
-}
-function setLoading(button, loading, label){
-  button.disabled = loading;
-  button.innerHTML = loading ? '<span class="auth-spinner"></span>Aguarde…' : label;
-}
-
-/* ---------- Tradução dos erros do Firebase para PT-BR ---------- */
-function traduzErro(code){
-  const mapa = {
-    'auth/email-already-in-use': 'Este e-mail já está cadastrado. Tente entrar.',
-    'auth/invalid-email': 'E-mail inválido. Verifique e tente novamente.',
-    'auth/weak-password': 'Senha muito fraca. Use ao menos 6 caracteres.',
-    'auth/missing-password': 'Digite uma senha.',
-    'auth/user-not-found': 'Não encontramos uma conta com este e-mail.',
-    'auth/wrong-password': 'Senha incorreta. Tente novamente.',
-    'auth/invalid-credential': 'E-mail ou senha incorretos.',
-    'auth/too-many-requests': 'Muitas tentativas. Aguarde um momento e tente de novo.',
-    'auth/network-request-failed': 'Falha de conexão. Verifique sua internet.',
-    'auth/operation-not-allowed': 'Cadastro por e-mail/senha está desativado no Firebase (ative em Authentication > Sign-in method).'
-  };
-  return mapa[code] || ('Ocorreu um erro. Tente novamente em alguns instantes.' + (code ? ' (' + code + ')' : ''));
-}
-
-function emailValido(email){
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-
-/* ---------- CADASTRO ---------- */
+/* ── Cadastro ── */
 signupForm?.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  clearMsg(signupMsg);
-
+  e.preventDefault(); clearMsg(signupMsg);
   const name = document.getElementById('signupName').value.trim();
   const email = document.getElementById('signupEmail').value.trim();
-  const password = document.getElementById('signupPassword').value;
-  const passwordConfirm = document.getElementById('signupPasswordConfirm').value;
-
-  if (!emailValido(email)) { showMsg(signupMsg, 'Digite um e-mail válido.', 'error'); return; }
-  if (password.length < 6) { showMsg(signupMsg, 'A senha precisa ter pelo menos 6 caracteres.', 'error'); return; }
-  if (password !== passwordConfirm) { showMsg(signupMsg, 'As senhas não coincidem.', 'error'); return; }
-
+  const pw    = document.getElementById('signupPassword').value;
+  const pw2   = document.getElementById('signupPasswordConfirm').value;
+  if(!emailValido(email)){ showMsg(signupMsg,'Digite um e-mail válido.','error'); return; }
+  if(pw.length < 6)      { showMsg(signupMsg,'A senha precisa ter pelo menos 6 caracteres.','error'); return; }
+  if(pw !== pw2)         { showMsg(signupMsg,'As senhas não coincidem.','error'); return; }
   setLoading(signupSubmit, true);
   try {
-    const cred = await createUserWithEmailAndPassword(auth, email, password);
-    if (name) {
-      try { await updateProfile(cred.user, { displayName: name }); } catch (_) { /* não bloqueia o cadastro */ }
-    }
-    showMsg(signupMsg, 'Conta criada com sucesso! Bem-vindo(a).', 'success');
+    const cred = await createUserWithEmailAndPassword(auth, email, pw);
+    if(name) try{ await updateProfile(cred.user,{displayName:name}); }catch(_){}
+    showMsg(signupMsg,'Conta criada com sucesso! Bem-vindo(a).','success');
     signupForm.reset();
     setTimeout(closeAuth, 1200);
-  } catch (err) {
-    showMsg(signupMsg, traduzErro(err.code), 'error');
-  } finally {
-    setLoading(signupSubmit, false, 'Criar conta');
-  }
+  } catch(err){ showMsg(signupMsg, traduzErro(err.code),'error'); }
+  finally{ setLoading(signupSubmit, false, 'Criar conta'); }
 });
 
-/* ---------- LOGIN ---------- */
+/* ── Login ── */
 loginForm?.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  clearMsg(loginMsg);
-
+  e.preventDefault(); clearMsg(loginMsg);
   const email = document.getElementById('loginEmail').value.trim();
-  const password = document.getElementById('loginPassword').value;
-
-  if (!emailValido(email)) { showMsg(loginMsg, 'Digite um e-mail válido.', 'error'); return; }
-  if (!password) { showMsg(loginMsg, 'Digite sua senha.', 'error'); return; }
-
+  const pw    = document.getElementById('loginPassword').value;
+  if(!emailValido(email)){ showMsg(loginMsg,'Digite um e-mail válido.','error'); return; }
+  if(!pw)                { showMsg(loginMsg,'Digite sua senha.','error'); return; }
   setLoading(loginSubmit, true);
   try {
-    await signInWithEmailAndPassword(auth, email, password);
-    showMsg(loginMsg, 'Login realizado com sucesso!', 'success');
+    await signInWithEmailAndPassword(auth, email, pw);
+    showMsg(loginMsg,'Login realizado com sucesso!','success');
     loginForm.reset();
     setTimeout(closeAuth, 800);
-  } catch (err) {
-    showMsg(loginMsg, traduzErro(err.code), 'error');
-  } finally {
-    setLoading(loginSubmit, false, 'Entrar');
-  }
+  } catch(err){ showMsg(loginMsg, traduzErro(err.code),'error'); }
+  finally{ setLoading(loginSubmit, false, 'Entrar'); }
 });
 
-/* ---------- Esqueci minha senha ---------- */
+/* ── Esqueci senha ── */
 forgotPasswordLink?.addEventListener('click', async () => {
   const email = document.getElementById('loginEmail').value.trim();
-  if (!emailValido(email)) {
-    showMsg(loginMsg, 'Digite seu e-mail no campo acima para recuperar a senha.', 'error');
-    return;
-  }
+  if(!emailValido(email)){ showMsg(loginMsg,'Digite seu e-mail acima primeiro.','error'); return; }
   try {
     await sendPasswordResetEmail(auth, email);
-    showMsg(loginMsg, 'Enviamos um e-mail para você redefinir sua senha.', 'success');
-  } catch (err) {
-    showMsg(loginMsg, traduzErro(err.code), 'error');
-  }
+    showMsg(loginMsg,'E-mail de recuperação enviado!','success');
+  } catch(err){ showMsg(loginMsg, traduzErro(err.code),'error'); }
 });
 
-/* ---------- Logout ---------- */
+/* ── Logout ── */
 btnLogout?.addEventListener('click', () => signOut(auth));
 
-/* ---------- Reflete o estado de autenticação na navbar ---------- */
+/* ════════════ SUPORTE / TICKETS ════════════ */
+const ticketForm   = document.getElementById('ticketForm');
+const ticketMsg    = document.getElementById('ticketMsg');
+const ticketSubmit = document.getElementById('ticketSubmit');
+const supportGate  = document.getElementById('support-gate');
+const supportUser  = document.getElementById('support-user');
+const supportAdmin = document.getElementById('support-admin');
+const ticketList   = document.getElementById('ticketList');
+const countOpen    = document.getElementById('countOpen');
+const countClosed  = document.getElementById('countClosed');
+
+let currentUser  = null;
+let adminTabView = 'open';
+let allTickets   = [];
+
+window.__adminTab = function(tab){
+  adminTabView = tab;
+  document.getElementById('adminTabOpen').classList.toggle('active', tab==='open');
+  document.getElementById('adminTabClosed').classList.toggle('active', tab==='closed');
+  renderTickets();
+};
+
+function updateSupportView(user){
+  if(!supportGate) return;
+  const isAdmin = user && user.email === ADMIN_EMAIL;
+  supportGate.style.display  = !user    ? '' : 'none';
+  supportUser.style.display  = (user && !isAdmin) ? '' : 'none';
+  supportAdmin.style.display = isAdmin  ? '' : 'none';
+  if(isAdmin) loadTickets();
+}
+window.__updateSupportView = () => updateSupportView(currentUser);
+
+/* ── Enviar ticket ── */
+ticketForm?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  if(!currentUser) return;
+  const assunto  = document.getElementById('ticketAssunto').value.trim();
+  const mensagem = document.getElementById('ticketMensagem').value.trim();
+  if(!assunto) { showMsg(ticketMsg,'Digite um assunto.','error'); return; }
+  if(!mensagem){ showMsg(ticketMsg,'Digite uma mensagem.','error'); return; }
+  setLoading(ticketSubmit, true);
+  try {
+    await addDoc(collection(db,'tickets'),{
+      assunto, mensagem, status:'open',
+      userEmail: currentUser.email,
+      userName:  currentUser.displayName || currentUser.email,
+      uid:       currentUser.uid,
+      criadoEm: serverTimestamp()
+    });
+    showMsg(ticketMsg,'Ticket enviado! Responderei em breve.','success');
+    ticketForm.reset();
+  } catch(err){
+    console.error('Erro ao enviar ticket:', err);
+    showMsg(ticketMsg,'Erro ao enviar. Tente novamente.','error');
+  } finally{ setLoading(ticketSubmit, false, 'Enviar ticket'); }
+});
+
+/* ── Carregar tickets (admin) ── */
+async function loadTickets(){
+  if(!ticketList) return;
+  ticketList.innerHTML = '<p class="tickets-empty">Carregando…</p>';
+  try {
+    const snap = await getDocs(query(collection(db,'tickets'), orderBy('criadoEm','desc')));
+    allTickets = snap.docs.map(d => ({id:d.id,...d.data()}));
+    renderTickets();
+  } catch(err){
+    console.error('Erro ao carregar tickets:', err);
+    ticketList.innerHTML = '<p class="tickets-empty">Erro ao carregar tickets.</p>';
+  }
+}
+
+/* ── Renderizar tickets ── */
+function renderTickets(){
+  const filtered = allTickets.filter(t => t.status === (adminTabView==='open' ? 'open' : 'closed'));
+  const opens    = allTickets.filter(t => t.status==='open').length;
+  const closeds  = allTickets.filter(t => t.status==='closed').length;
+  if(countOpen)   countOpen.textContent   = opens   ? `(${opens})`   : '';
+  if(countClosed) countClosed.textContent = closeds ? `(${closeds})` : '';
+  if(!filtered.length){
+    ticketList.innerHTML = `<p class="tickets-empty">${adminTabView==='open' ? 'Nenhum ticket aberto.' : 'Nenhum ticket resolvido.'}</p>`;
+    return;
+  }
+  ticketList.innerHTML = filtered.map(t => {
+    const data = t.criadoEm?.toDate ? t.criadoEm.toDate().toLocaleString('pt-BR') : '—';
+    return `<div class="ticket-card">
+      <div class="ticket-card-head">
+        <span class="ticket-assunto">${esc(t.assunto)}</span>
+        <span class="ticket-badge ${t.status==='open'?'open':'closed'}">${t.status==='open'?'Aberto':'Resolvido'}</span>
+      </div>
+      <div class="ticket-meta">De: ${esc(t.userName||t.userEmail)} · ${data}</div>
+      <div class="ticket-msg">${esc(t.mensagem)}</div>
+      ${t.status==='open'?`<div class="ticket-actions"><button class="btn btn-solid btn-resolve" onclick="window.__resolveTicket('${t.id}')">Marcar como resolvido</button></div>`:''}
+    </div>`;
+  }).join('');
+}
+
+window.__resolveTicket = async function(id){
+  try {
+    await updateDoc(doc(db,'tickets',id),{status:'closed'});
+    allTickets = allTickets.map(t => t.id===id ? {...t,status:'closed'} : t);
+    renderTickets();
+  } catch(err){ console.error(err); alert('Erro ao atualizar ticket.'); }
+};
+
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+/* ════════════ onAuthStateChanged — central ════════════ */
 onAuthStateChanged(auth, (user) => {
-  if (user) {
+  currentUser = user;
+  if(user){
     navAccount.classList.add('active');
-    btnOpenLogin.style.display = 'none';
+    btnOpenLogin.style.display  = 'none';
     btnOpenSignup.style.display = 'none';
-    const displayName = user.displayName || user.email || 'Usuário';
-    navAvatar.textContent = displayName.charAt(0).toUpperCase();
-    navEmail.textContent = user.displayName || user.email || '';
+    const name = user.displayName || user.email || 'Usuário';
+    navAvatar.textContent = name.charAt(0).toUpperCase();
+    navEmail.textContent  = user.displayName || user.email || '';
   } else {
     navAccount.classList.remove('active');
-    btnOpenLogin.style.display = '';
+    btnOpenLogin.style.display  = '';
     btnOpenSignup.style.display = '';
     navEmail.textContent = '';
   }
+  updateSupportView(user);
 });
 </script>
 </body>
